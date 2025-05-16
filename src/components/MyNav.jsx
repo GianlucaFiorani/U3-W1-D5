@@ -11,9 +11,8 @@ import avatar from "../assets/img/avatar.png";
 
 function MyNav() {
   const [open, setOpen] = useState(false);
-
   return (
-    <Navbar className="sticky-top" expand="lg" bg="black" data-bs-theme="dark">
+    <Navbar sticky="top" expand="lg" bg="black" data-bs-theme="dark">
       <Container fluid className="px-0">
         <Navbar.Brand href="#">
           <img className="logo" width="110" src={logo} alt="netflix_logo" />
@@ -54,19 +53,18 @@ function MyNav() {
               <BellFill />
             </Button>
           </Nav.Link>
-          <Nav.Link href="#">
-            <Dropdown data-bs-theme="dark">
-              <Dropdown.Toggle id="dropdown-button-dark-example1" variant="black">
-                <img width="35" src={avatar} alt="netflix_logo" />
-              </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item href="#">Account</Dropdown.Item>
-                <Dropdown.Item href="#">Settings</Dropdown.Item>
-                <Dropdown.Item href="#">Sing out</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </Nav.Link>
+          <Dropdown data-bs-theme="dark">
+            <Dropdown.Toggle id="dropdown-button-dark-example1" variant="black">
+              <img width="35" src={avatar} alt="netflix_logo" />
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#">Account</Dropdown.Item>
+              <Dropdown.Item href="#">Settings</Dropdown.Item>
+              <Dropdown.Item href="#">Sing out</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Navbar.Collapse>
       </Container>
     </Navbar>

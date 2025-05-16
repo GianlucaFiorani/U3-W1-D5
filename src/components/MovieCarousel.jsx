@@ -28,7 +28,11 @@ class MovieCarousel extends Component {
   };
   componentDidMount() {
     this.fetchMovies(this.props.id);
+    // this.carouselChange(false);
   }
+  // carouselChange = (type) => {
+  //   type ? (this.props.change = true) : (this.props.change = false);
+  // };
   render() {
     return (
       <Container className="movie-container mt-5">
@@ -39,12 +43,20 @@ class MovieCarousel extends Component {
             Loading... <Spinner animation="border" variant="danger" />
           </div>
         ) : (
-          <Row className="movie-row flex-nowrap mt-3">
+          <Row
+            className={`movie-row mt-3 ${this.props.change && "flex-nowrap"}`}
+            xs={!this.props.change && 1}
+            sm={!this.props.change && 2}
+            lg={!this.props.change && 3}
+            xl={!this.props.change && 6}
+          >
             {this.state.movies.map((movie) => (
-              <Col key={`movie-${movie.imdbID}`}>
-                <Card style={{ width: "8rem" }} data-bs-theme="dark">
-                  <Card.Img variant="top" src={movie.Poster} />
-                </Card>
+              <Col className="my-1" key={`movie-${movie.imdbID}`}>
+                <div className="d-flex justify-content-center">
+                  <Card style={this.props.change ? { width: "10rem" } : null} data-bs-theme="dark">
+                    <Card.Img variant="top" src={movie.Poster} />
+                  </Card>
+                </div>
               </Col>
             ))}
           </Row>

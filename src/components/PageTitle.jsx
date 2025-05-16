@@ -4,14 +4,14 @@ import ToggleButton from "react-bootstrap/ToggleButton";
 import { BorderWidth, GridFill } from "react-bootstrap-icons";
 import { Dropdown } from "react-bootstrap";
 
-function PageTitle() {
-  const [checked, setChecked] = useState(false);
+function PageTitle(changeType) {
   const [radioValue, setRadioValue] = useState("1");
 
   const radios = [
     { name: "GridFill", value: "1" },
     { name: "Radio", value: "2" },
   ];
+
   return (
     <div className="title mt-4">
       <div className="d-flex justify-content-between">
@@ -39,7 +39,11 @@ function PageTitle() {
               name="radio"
               value={radio.value}
               checked={radioValue === radio.value}
-              onChange={(e) => setRadioValue(e.currentTarget.value)}
+              onChange={(e) => {
+                setRadioValue(e.currentTarget.value);
+                console.log(radio.value);
+                changeType.changeType();
+              }}
             >
               {idx > 0 ? <GridFill /> : <BorderWidth />}
             </ToggleButton>

@@ -6,9 +6,9 @@ import Settings from "./components/Settings";
 
 class App extends Component {
   state = {
-    TvShow: false,
+    TvShow: true,
     Account: false,
-    Settings: true,
+    Settings: false,
   };
   render() {
     return (
