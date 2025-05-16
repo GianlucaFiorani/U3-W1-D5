@@ -1,11 +1,12 @@
 import "./App.css";
 import { Component } from "react";
 import TvShow from "./components/TvShow";
+import Account from "./components/Account";
 
 class App extends Component {
   state = {
-    TvShow: true,
-    Account: false,
+    TvShow: false,
+    Account: true,
   };
   render() {
     return (
