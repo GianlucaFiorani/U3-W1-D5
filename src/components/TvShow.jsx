@@ -17,7 +17,7 @@ class TvShow extends Component {
     return (
       <>
         <Container className="px-2">
-          <MyNav />
+          <MyNav accountLink={this.props.accountLink} settingsLink={this.props.settingsLink} tvShowLink={this.props.tvShowLink} setting={this.props.settings} />
           <PageTitle changeType={this.carouselChange} />
           <MovieCarousel id="Harry Potter" change={this.state.change} />
           <MovieCarousel id="Lord of the Rings" change={this.state.change} />

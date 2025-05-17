@@ -4,7 +4,7 @@ import ToggleButton from "react-bootstrap/ToggleButton";
 import { BorderWidth, GridFill } from "react-bootstrap-icons";
 import { Dropdown } from "react-bootstrap";
 
-function PageTitle(changeType) {
+function PageTitle(props) {
   const [radioValue, setRadioValue] = useState("1");
 
   const radios = [
@@ -41,8 +41,7 @@ function PageTitle(changeType) {
               checked={radioValue === radio.value}
               onChange={(e) => {
                 setRadioValue(e.currentTarget.value);
-                console.log(radio.value);
-                changeType.changeType();
+                props.changeType();
               }}
             >
               {idx > 0 ? <GridFill /> : <BorderWidth />}

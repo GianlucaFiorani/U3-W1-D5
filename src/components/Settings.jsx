@@ -4,11 +4,11 @@ import avatar from "../assets/img/avatar.png";
 import hd from "../assets/img/hd.png";
 import MyNav from "./MyNav";
 
-function Settings() {
+function Settings(props) {
   return (
     <div>
       <Container>
-        <MyNav />
+        <MyNav accountLink={props.accountLink} settingsLink={props.accountLink} tvShowLink={props.tvShowLink} setting={props.setting} />
       </Container>
       <main>
         <div className="d-flex justify-content-center">

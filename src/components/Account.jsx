@@ -3,7 +3,7 @@ import avatar from "../assets/img/avatar.png";
 import logo from "../assets/img/netflix_logo.png";
 import { PenFill } from "react-bootstrap-icons";
 
-function Account() {
+function Account(props) {
   return (
     <div>
       <img className="logo m-2" width="110" src={logo} alt="netflix_logo" />
@@ -58,7 +58,7 @@ function Account() {
                           label={`Autoplay next episode in a series on all devices.`}
                         />
                         <Form.Check // prettier-ignore
-                          checked
+                          defaultChecked
                           type={type}
                           id={`default-${type}`}
                           label={`Autoplay previews while browsing on all devices.`}
@@ -73,20 +73,41 @@ function Account() {
               <Row className="justify-content-between border-top border-secondary mt-4 pt-4">
                 <Col xs="auto" className="p-0">
                   <a className="link-underline link-underline-opacity-0">
-                    <Button variant="outline-secondary" className=" fs-4  p-2 px-1 px-xxs-4 mt-2 mx-0 mb-4">
+                    <Button
+                      variant="outline-secondary"
+                      className=" fs-4  p-2 px-1 px-xxs-4 mt-2 mx-0 mb-4"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        props.tvShowLink();
+                      }}
+                    >
                       SAVE
                     </Button>
                   </a>
                 </Col>
                 <Col xs="auto" className="px-2">
                   <a className="link-underline link-underline-opacity-0">
-                    <Button variant="outline-secondary" className=" fs-4  p-2 px-1 px-xxs-4 mt-2 mx-0 mb-4">
+                    <Button
+                      variant="outline-secondary"
+                      className=" fs-4  p-2 px-1 px-xxs-4 mt-2 mx-0 mb-4"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        props.tvShowLink();
+                      }}
+                    >
                       CANCEL
                     </Button>
                   </a>
                 </Col>
                 <Col xs="auto" className="p-0">
-                  <Button variant="outline-secondary" className=" fs-4  p-2 px-1 px-xxs-4 mt-2 mx-0 mb-4">
+                  <Button
+                    variant="outline-secondary"
+                    className=" fs-4  p-2 px-1 px-xxs-4 mt-2 mx-0 mb-4"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      props.tvShowLink();
+                    }}
+                  >
                     DELETE PROFILE
                   </Button>
                 </Col>

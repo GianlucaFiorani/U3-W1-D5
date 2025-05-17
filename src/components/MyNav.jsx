@@ -9,7 +9,7 @@ import Navbar from "react-bootstrap/Navbar";
 import logo from "../assets/img/netflix_logo.png";
 import avatar from "../assets/img/avatar.png";
 
-function MyNav() {
+function MyNav(props) {
   const [open, setOpen] = useState(false);
   return (
     <Navbar sticky="top" expand="lg" bg="black" data-bs-theme="dark">
@@ -30,14 +30,30 @@ function MyNav() {
           </Nav>
           <Nav.Link href="#">
             <div className="d-flex">
-              <Button variant="black" onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open}>
+              <Button
+                variant="black"
+                onClick={() => {
+                  setOpen(!open);
+                  props.setting && props.tvShowLink();
+                }}
+                aria-controls="example-collapse-text"
+                aria-expanded={open}
+              >
                 <Search />
               </Button>
 
               <Collapse in={open} dimension="width">
                 <div id="example-collapse-text">
                   <Form className="d-flex">
-                    <Form.Control type="search" placeholder="Search" className="me-2" aria-label="Search" />
+                    <Form.Control
+                      type="search"
+                      placeholder="Search"
+                      className="me-2"
+                      aria-label="Search"
+                      onChange={(e) => {
+                        e.preventDefault();
+                      }}
+                    />
                   </Form>
                 </div>
               </Collapse>
@@ -60,8 +76,24 @@ function MyNav() {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#">Account</Dropdown.Item>
-              <Dropdown.Item href="#">Settings</Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  e.preventDefault();
+                  props.accountLink();
+                }}
+                href="#"
+              >
+                Account
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  e.preventDefault();
+                  props.setting ? props.tvShowLink() : props.settingsLink();
+                }}
+                href="#"
+              >
+                {props.setting ? "TvShow" : "Settings"}
+              </Dropdown.Item>
               <Dropdown.Item href="#">Sing out</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
