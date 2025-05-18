@@ -16,7 +16,11 @@ function PageTitle(props) {
     <div className="title mt-4">
       <div className="d-flex justify-content-between">
         <div className="d-flex align-items-center gap-5">
-          <h1>Tv Shows</h1>
+          <h1>
+            {props.home && "Home"}
+            {props.show && "Tv Shows"}
+            {props.movie && "Movies"}
+          </h1>
           <Dropdown data-bs-theme="dark">
             <Dropdown.Toggle className="fs-5" id="dropdown-button-dark-example1" variant="outline-light">
               <span className="me-2">Generes </span>

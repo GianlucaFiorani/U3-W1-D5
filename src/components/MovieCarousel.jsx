@@ -4,6 +4,7 @@ import { Card, Col, Container, Row, Spinner } from "react-bootstrap";
 class MovieCarousel extends Component {
   state = {
     movies: [],
+    response: true,
     isLoading: true,
     hasError: false,
     errorMessage: "",
@@ -15,6 +16,7 @@ class MovieCarousel extends Component {
       const response = await fetch("http://www.omdbapi.com/?i=tt3896198&apikey=f5beaab6&s=" + id);
       if (response.ok) {
         const movies = await response.json();
+        this.setState({ response: movies.Response }, () => {});
         this.setState({ movies: movies.Search }, () => {});
       } else {
         throw new Error("Errore nel caricamento film");
@@ -28,15 +30,11 @@ class MovieCarousel extends Component {
   };
   componentDidMount() {
     this.fetchMovies(this.props.id);
-    // this.carouselChange(false);
   }
-  // carouselChange = (type) => {
-  //   type ? (this.props.change = true) : (this.props.change = false);
-  // };
   render() {
     return (
       <Container className="movie-container mt-5">
-        <h2>{this.props.id} Collection</h2>
+        <h2>{this.props.search ? `You are Searching: ${this.props.id} ` : `${this.props.id} Collection`} </h2>
         {this.state.isLoading ? (
           <div>
             {" "}
@@ -50,15 +48,42 @@ class MovieCarousel extends Component {
             lg={!this.props.change && 3}
             xl={!this.props.change && 6}
           >
-            {this.state.movies.map((movie) => (
-              <Col className="my-1" key={`movie-${movie.imdbID}`}>
-                <div className="d-flex justify-content-center">
-                  <Card style={this.props.change ? { width: "10rem" } : null} data-bs-theme="dark">
-                    <Card.Img variant="top" src={movie.Poster} />
-                  </Card>
-                </div>
-              </Col>
-            ))}
+            {this.props.home
+              ? this.state.movies === undefined
+                ? this.props.submitted && <h1 className="text-danger text-center">Not Found</h1>
+                : this.state.movies.map((movie) => (
+                    <Col className="my-1" key={`movie-${movie.imdbID}`}>
+                      <div className="d-flex justify-content-center">
+                        <Card style={this.props.change ? { width: "10rem" } : null} data-bs-theme="dark">
+                          <Card.Img variant="top" src={movie.Poster} />
+                        </Card>
+                      </div>
+                    </Col>
+                  ))
+              : this.state.movies !== undefined && this.props.show
+              ? this.state.movies
+                  .filter((movie) => movie.Type !== "movie")
+                  .map((movie) => (
+                    <Col className="my-1" key={`movie-${movie.imdbID}`}>
+                      <div className="d-flex justify-content-center">
+                        <Card style={this.props.change ? { width: "10rem" } : null} data-bs-theme="dark">
+                          <Card.Img variant="top" src={movie.Poster} />
+                        </Card>
+                      </div>
+                    </Col>
+                  ))
+              : this.state.movies !== undefined &&
+                this.state.movies
+                  .filter((movie) => movie.Type === "movie")
+                  .map((movie) => (
+                    <Col className="my-1" key={`movie-${movie.imdbID}`}>
+                      <div className="d-flex justify-content-center">
+                        <Card style={this.props.change ? { width: "10rem" } : null} data-bs-theme="dark">
+                          <Card.Img variant="top" src={movie.Poster} />
+                        </Card>
+                      </div>
+                    </Col>
+                  ))}
           </Row>
         )}
       </Container>

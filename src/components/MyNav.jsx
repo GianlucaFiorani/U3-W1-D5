@@ -20,13 +20,54 @@ function MyNav(props) {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
-            <Nav.Link href="#">Home</Nav.Link>
-            <Nav.Link href="#" active>
+            <Nav.Link
+              active={!props.setting && props.home && true}
+              onClick={(e) => {
+                e.preventDefault();
+                props.reset();
+                props.homeLink();
+                setTimeout(() => {
+                  props.tvShowLink();
+                }, 5);
+              }}
+              href="#"
+            >
+              Home
+            </Nav.Link>
+            <Nav.Link
+              href="#"
+              active={!props.setting && props.show && true}
+              onClick={(e) => {
+                e.preventDefault();
+                props.reset();
+                props.showLink();
+                setTimeout(() => {
+                  props.tvShowLink();
+                }, 5);
+              }}
+            >
               TvShow
             </Nav.Link>
-            <Nav.Link href="#">Movies</Nav.Link>
-            <Nav.Link href="#">Recently Added</Nav.Link>
-            <Nav.Link href="#">MyList</Nav.Link>
+            <Nav.Link
+              active={!props.setting && props.movie && true}
+              onClick={(e) => {
+                e.preventDefault();
+                props.reset();
+                props.movieLink();
+                setTimeout(() => {
+                  props.tvShowLink();
+                }, 5);
+              }}
+              href="#"
+            >
+              Movies
+            </Nav.Link>
+            <Nav.Link active={false} href="#">
+              Recently Added
+            </Nav.Link>
+            <Nav.Link active={false} href="#">
+              MyList
+            </Nav.Link>
           </Nav>
           <Nav.Link href="#">
             <div className="d-flex">
@@ -44,14 +85,24 @@ function MyNav(props) {
 
               <Collapse in={open} dimension="width">
                 <div id="example-collapse-text">
-                  <Form className="d-flex">
+                  <Form
+                    className="d-flex"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      props.submitVrify();
+                      props.reset();
+                      props.homeLink();
+                      setTimeout(() => {
+                        props.tvShowLink();
+                      }, 5);
+                    }}
+                  >
                     <Form.Control
-                      type="search"
+                      type="text"
                       placeholder="Search"
                       className="me-2"
-                      aria-label="Search"
                       onChange={(e) => {
-                        e.preventDefault();
+                        props.search(e.target.value);
                       }}
                     />
                   </Form>

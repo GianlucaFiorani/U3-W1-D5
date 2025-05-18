@@ -8,7 +8,19 @@ function Settings(props) {
   return (
     <div>
       <Container>
-        <MyNav accountLink={props.accountLink} settingsLink={props.accountLink} tvShowLink={props.tvShowLink} setting={props.setting} />
+        <MyNav
+          reset={props.reset}
+          accountLink={props.accountLink}
+          settingsLink={props.accountLink}
+          tvShowLink={props.tvShowLink}
+          setting={props.setting}
+          home={props.home}
+          show={props.show}
+          movie={props.movie}
+          homeLink={props.homeSelect}
+          showLink={props.showSelect}
+          movieLink={props.movieSelect}
+        />
       </Container>
       <main>
         <div className="d-flex justify-content-center">
